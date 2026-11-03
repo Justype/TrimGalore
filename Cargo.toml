@@ -47,6 +47,10 @@ fastqc-rust = "=1.0.1"
 # See plans/06252026_ubam-input-support/PLAN.md §5 step 1.
 noodles = { version = "=0.88.0", default-features = false, features = ["bam"] }
 
+# musl's own allocator is slow with many threads; static musl builds use mimalloc
+[target.'cfg(target_env = "musl")'.dependencies]
+mimalloc = "0.1"
+
 [dev-dependencies]
 serde_json = "1"
 tempfile = "3"
